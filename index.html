@@ -296,7 +296,12 @@
   table.caltable { min-width: 800px; font-size: 12.5px; table-layout: fixed; }
   table.caltable td { vertical-align: middle; }
   table.caltable th:nth-child(1), table.caltable td.caldatecell { width: 64px; }
-  table.caltable th:nth-child(2), table.caltable td.caltimetd { width: 145px; }
+  table.caltable th:nth-child(1), table.caltable td.caldatecell {
+    position: sticky; left: 0; z-index: 2;
+    box-shadow: 2px 0 5px rgba(124,45,18,0.12);
+  }
+  table.caltable th:nth-child(1) { z-index: 3; }
+  table.caltable th:nth-child(2), table.caltable td.caltimetd { width: 128px; }
   table.caltable th:nth-child(3) { width: 180px; }
   table.caltable th:nth-child(4), table.caltable td.calpoccell { width: 140px; }
   table.caltable th:nth-child(5) { width: 140px; }
@@ -319,7 +324,7 @@
   }
   .caldatebadge-inline .cdnum { display: block; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 12.5px; }
   .caldatebadge-inline .cddow { display: block; font-size: 9px; opacity: 0.85; letter-spacing: 0.3px; }
-  .caltimetd { white-space: normal; padding-left: 18px !important; }
+  .caltimetd { white-space: normal; padding-left: 14px !important; padding-right: 8px !important; }
   .caltag { display: block; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: white; font-size: 9.5px; font-weight: 700; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.3px; width: fit-content; margin-bottom: 3px; }
   .caltime { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; color: var(--brand2); white-space: nowrap; }
   .caltime .clk { color: var(--brand2); flex-shrink: 0; }
