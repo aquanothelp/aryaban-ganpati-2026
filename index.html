@@ -6,11 +6,11 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build-version" content="2026-09-15T14:39:34+05:30">
+<meta name="build-version" content="2026-09-15T15:04:07+05:30">
 <title>Aryaban Ganesh Mandal 2026</title>
 <script>
 (function() {
-  var CURRENT_VERSION = "2026-09-15T14:39:34+05:30";
+  var CURRENT_VERSION = "2026-09-15T15:04:07+05:30";
   try {
     fetch(location.pathname + '?_cb=' + Date.now(), { cache: 'no-store' })
       .then(function(r) { return r.text(); })
@@ -485,6 +485,7 @@
     cursor: default;
   }
   .pfrow.split-open { z-index: 41; }
+  .pfrow.split-open .pfface-front { box-shadow: inset 0 0 0 1.5px rgba(159,18,57,0.45); }
   .pfrow.split-open .pfsplit { display: block; }
   .pfsplit-head {
     font-size: 9.5px; font-weight: 800; letter-spacing: 0.3px;
@@ -994,7 +995,7 @@
     <p class="tag">Ganpati Bappa Morya</p>
     <p class="aarti"><span class="aarti-icon">🪔</span><span class="aarti-label">Daily Aarti</span><span class="aarti-slot"><b>Morning</b>8:30 AM</span><span class="aarti-slot"><b>Evening</b>7:00 PM</span></p>
   </div>
-  <p class="updated">Updated: 15 Sep 2026, 2:39 PM IST</p>
+  <p class="updated">Updated: 15 Sep 2026, 3:04 PM IST</p>
 </header>
 
 <nav class="navbar">
@@ -1771,7 +1772,7 @@ document.querySelectorAll('.pfrow').forEach(function(row) {
   row.setAttribute('tabindex', '0');
   row.setAttribute('role', 'button');
   var isSplit = row.classList.contains('pfrow-split');
-  var revertTimer = null, clickTimer = null;
+  var revertTimer = null;
   function showAmountBriefly() {
     if (pfShowAll) return;
     row.classList.add('flipped');
@@ -1781,40 +1782,31 @@ document.querySelectorAll('.pfrow').forEach(function(row) {
       revertTimer = null;
     }, 450);
   }
-  function toggleSplit() {
+  // A split flat (owner + tenant both paid) reveals its breakdown on a SINGLE click, at the
+  // same time as the combined amount. Double-click used to be the only way in, and nothing on
+  // the card hints at it, so in practice nobody found it.
+  function activate() {
+    if (!isSplit) {
+      pfCloseSplits(null);
+      showAmountBriefly();
+      return;
+    }
     var open = row.classList.contains('split-open');
     pfCloseSplits(row);
     row.classList.toggle('split-open', !open);
-    if (!open) pfClampSplit(row);
-  }
-  if (!isSplit) {
-    row.addEventListener('click', function() {
-      pfCloseSplits(null);
+    if (!open) {
+      pfClampSplit(row);
       showAmountBriefly();
-    });
-  } else {
-    row.addEventListener('click', function(e) {
-      if (e.target.closest('.pfsplit')) return;
-      if (clickTimer) return;
-      clickTimer = setTimeout(function() {
-        clickTimer = null;
-        pfCloseSplits(null);
-        showAmountBriefly();
-      }, 240);
-    });
-    row.addEventListener('dblclick', function(e) {
-      if (e.target.closest('.pfsplit')) return;
-      e.preventDefault();
-      if (clickTimer) { clearTimeout(clickTimer); clickTimer = null; }
-      if (revertTimer) { clearTimeout(revertTimer); revertTimer = null; }
-      if (!pfShowAll) row.classList.remove('flipped');
-      toggleSplit();
-    });
+    }
   }
+  row.addEventListener('click', function(e) {
+    if (e.target.closest('.pfsplit')) return;   // clicks inside the popover must not close it
+    activate();
+  });
   row.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      if (isSplit && e.shiftKey) { toggleSplit(); } else { showAmountBriefly(); }
+      activate();
     } else if (e.key === 'Escape') {
       row.classList.remove('split-open');
     }
