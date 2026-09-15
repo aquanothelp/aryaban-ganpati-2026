@@ -6,11 +6,11 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build-version" content="2026-09-15T15:04:07+05:30">
+<meta name="build-version" content="2026-09-15T15:18:56+05:30">
 <title>Aryaban Ganesh Mandal 2026</title>
 <script>
 (function() {
-  var CURRENT_VERSION = "2026-09-15T15:04:07+05:30";
+  var CURRENT_VERSION = "2026-09-15T15:18:56+05:30";
   try {
     fetch(location.pathname + '?_cb=' + Date.now(), { cache: 'no-store' })
       .then(function(r) { return r.text(); })
@@ -858,9 +858,9 @@
   }
   .toplinks a::before { margin-right: 6px; font-size: 14px; }
   .toplinks a:nth-child(1)::before { content: "📅"; }
-  .toplinks a:nth-child(2)::before { content: "🪙"; }
+  .toplinks a:nth-child(2)::before { content: "💰"; }
   .toplinks a:nth-child(3)::before { content: "📊"; }
-  .toplinks a:nth-child(4)::before { content: "🕉️"; }
+  .toplinks a:nth-child(4)::before { content: "🤝"; }
   .toplinks a:nth-child(5)::before { content: "📋"; }
   .toplinks a:nth-child(6)::before { content: "📸"; }
 
@@ -923,6 +923,39 @@
   .glance-label { font-size: 10px; font-weight: 700; letter-spacing: .65px; text-transform: uppercase; color: rgba(255,255,255,.65); }
   .glance-value { margin-top: 2px; font: 700 14px/1.3 'Poppins', sans-serif; overflow-wrap: anywhere; }
 
+  .ev-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px 2px 6px;
+    border-radius: 20px;
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1.5;
+  }
+  .ev-flag::before { font-size: 10px; font-weight: 900; }
+  .done-flag { background: #e7f6ec; border: 1px solid #a8d8b9; color: #1b7a43; }
+  .done-flag::before { content: "\2713"; }
+  /* today is amber rather than green, so "happening now" never reads as "finished" */
+  .today-flag { background: #fdf0d2; border: 1px solid #edbf62; color: #9a5b06; }
+  .today-flag::before { content: "\25CF"; font-size: 8px; }
+  /* desktop table: sit the flag at the top-right of the row's last cell */
+  .done-cellwrap { display: flex; justify-content: flex-end; margin-bottom: 3px; }
+  table.caltable tr.is-done .caleventcell { opacity: 1; }
+  /* mobile card: true top-right corner of the card */
+  .mobile-event.is-done, .mobile-event.is-today { padding-right: 68px; }
+  .mobile-event.is-done .ev-flag, .mobile-event.is-today .ev-flag {
+    position: absolute; top: 9px; right: 9px;
+  }
+  /* brief ring on the card the Today strip jumped to, so it is obvious where you landed */
+  @keyframes jumpFlash {
+    0%, 100% { box-shadow: 0 3px 12px rgba(124,45,18,.07); }
+    25%, 75% { box-shadow: 0 0 0 3px rgba(159,18,57,.45), 0 3px 12px rgba(124,45,18,.07); }
+  }
+  .mobile-event.jump-flash { animation: jumpFlash 1.5s ease-in-out; }
   .today-strip { display: none; }
   @media (max-width: 760px) {
     .today-strip {
@@ -995,7 +1028,7 @@
     <p class="tag">Ganpati Bappa Morya</p>
     <p class="aarti"><span class="aarti-icon">🪔</span><span class="aarti-label">Daily Aarti</span><span class="aarti-slot"><b>Morning</b>8:30 AM</span><span class="aarti-slot"><b>Evening</b>7:00 PM</span></p>
   </div>
-  <p class="updated">Updated: 15 Sep 2026, 3:04 PM IST</p>
+  <p class="updated">Updated: 15 Sep 2026, 3:18 PM IST</p>
 </header>
 
 <nav class="navbar">
@@ -1023,7 +1056,7 @@
   </div>
   <div class="glance-grid" aria-label="Festival at a glance">
     <div class="glance-card"><span class="glance-icon">📅</span><div class="glance-text"><div class="glance-label">Celebration</div><div class="glance-value">14–25 Sep 2026</div></div></div>
-    <div class="glance-card"><span class="glance-icon">🪙</span><div class="glance-text"><div class="glance-label">Vargani</div><div class="glance-value">77.2% flats paid</div></div></div>
+    <div class="glance-card"><span class="glance-icon">💰</span><div class="glance-text"><div class="glance-label">Vargani</div><div class="glance-value">77.2% flats paid</div></div></div>
     <div class="glance-card"><span class="glance-icon">🪔</span><div class="glance-text"><div class="glance-label">Daily Aarti</div><div class="glance-value">8:30 AM &amp; 7:00 PM</div></div></div>
   </div>
 </section>
@@ -1059,7 +1092,7 @@
 
 <div class="section" id="progress">
   <div class="card">
-    <h2 class="stitle"><span class="stitle-left"><span class="icobadge">🪙</span>Vargani Collection Progress</span><button class="collapse-btn" data-target="progress-body" aria-expanded="true" aria-label="Collapse section"><span class="tri"></span></button></h2>
+    <h2 class="stitle"><span class="stitle-left"><span class="icobadge">💰</span>Vargani Collection Progress</span><button class="collapse-btn" data-target="progress-body" aria-expanded="true" aria-label="Collapse section"><span class="tri"></span></button></h2>
     <div class="card-body" id="progress-body">
     <div class="hero-grid">
       <div class="hero-left">
@@ -1186,7 +1219,7 @@
 
 <div class="section" id="mandal">
   <div class="card">
-    <h2 class="stitle"><span class="stitle-left"><span class="icobadge">🕉️</span>Mandal <span class="stitle-sub">— Departments &amp; Coordinators</span></span><button class="collapse-btn" data-target="mandal-body" aria-expanded="true" aria-label="Collapse section"><span class="tri"></span></button></h2>
+    <h2 class="stitle"><span class="stitle-left"><span class="icobadge">🤝</span>Mandal <span class="stitle-sub">— Departments &amp; Coordinators</span></span><button class="collapse-btn" data-target="mandal-body" aria-expanded="true" aria-label="Collapse section"><span class="tri"></span></button></h2>
     <div class="card-body" id="mandal-body">
     <div class="dcard d1">
       <div class="dnum">01</div>
@@ -1538,11 +1571,9 @@
 })();
 
 
-(function buildTodayStrip() {
-  var strip = document.getElementById('todayStrip');
-  var cards = document.querySelectorAll('.mobile-event');
-  if (!strip || !cards.length) return;
-
+// Shared calendar-date helpers. Both the Today strip and the DONE flags depend on "what day
+// is it in Kolkata" and on parsing "14 Sep" labels; keeping one copy stops them drifting apart.
+var AryabanDates = (function() {
   var MONTHS = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
 
   // the calendar heading carries the festival year, e.g. "14 - 25 Sep 2026"
@@ -1573,7 +1604,16 @@
     return new Date(n.getFullYear(), n.getMonth(), n.getDate());
   }
 
-  var today = todayInIST();
+  return { parseDayLabel: parseDayLabel, todayInIST: todayInIST, year: YEAR };
+})();
+
+(function buildTodayStrip() {
+  var strip = document.getElementById('todayStrip');
+  var cards = document.querySelectorAll('.mobile-event');
+  if (!strip || !cards.length) return;
+
+  var parseDayLabel = AryabanDates.parseDayLabel;
+  var today = AryabanDates.todayInIST();
 
   // group the already-built day cards by date, preserving order
   var groups = [];
@@ -1655,11 +1695,77 @@
   link.className = 'today-link';
   link.href = '#calendar';
   link.textContent = 'See full calendar \u2192';
+  // jump to THIS day's card in the calendar, not to the top of the section
+  link.addEventListener('click', function(e) {
+    var target = pick.cards[0];
+    if (!target) return;                 // fall back to the plain #calendar anchor
+    e.preventDefault();
+    var body = document.getElementById('cal-body');
+    if (body && body.classList.contains('collapsed')) {
+      var btn = document.querySelector('[data-target="cal-body"]');
+      if (btn) btn.click();              // expand first, or scrolling lands nowhere
+    }
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    target.classList.remove('jump-flash');
+    void target.offsetWidth;             // restart the animation if it is clicked again
+    target.classList.add('jump-flash');
+    setTimeout(function() { target.classList.remove('jump-flash'); }, 1600);
+  });
 
   strip.appendChild(head);
   strip.appendChild(list);
   strip.appendChild(link);
   strip.hidden = false;
+})();
+
+
+(function markEventStatus() {
+  var today = AryabanDates.todayInIST();
+
+  // past day -> Done, the current day -> Today, anything later -> no flag
+  function statusFor(d) {
+    if (!d) return null;
+    if (d.getTime() < today.getTime()) return 'done';
+    if (d.getTime() === today.getTime()) return 'today';
+    return null;
+  }
+
+  function flag(kind) {
+    var el = document.createElement('span');
+    el.className = kind === 'today' ? 'ev-flag today-flag' : 'ev-flag done-flag';
+    el.textContent = kind === 'today' ? 'Today' : 'Done';
+    return el;
+  }
+
+  // Desktop table: the date cell carries a rowspan across a whole day, so walk the rows and
+  // remember the last date seen -- continuation rows have no date cell of their own.
+  var current = null;
+  var table = document.querySelector('table.caltable');
+  if (table && table.tBodies.length) {
+    Array.prototype.forEach.call(table.tBodies[0].rows, function(row) {
+      var numEl = row.querySelector('.caldatecell .cdnum');
+      if (numEl) current = AryabanDates.parseDayLabel(numEl.textContent);
+      var kind = statusFor(current);
+      if (!kind) return;
+      row.classList.add(kind === 'today' ? 'is-today' : 'is-done');
+      var last = row.cells[row.cells.length - 1];
+      if (last && !last.querySelector('.ev-flag')) {
+        var holder = document.createElement('div');   // never flex a <td> directly
+        holder.className = 'done-cellwrap';
+        holder.appendChild(flag(kind));
+        last.insertBefore(holder, last.firstChild);
+      }
+    });
+  }
+
+  // Mobile day cards
+  document.querySelectorAll('.mobile-event').forEach(function(card) {
+    var numEl = card.querySelector('.mobile-event-date strong');
+    var kind = statusFor(numEl ? AryabanDates.parseDayLabel(numEl.textContent) : null);
+    if (!kind) return;
+    card.classList.add(kind === 'today' ? 'is-today' : 'is-done');
+    if (!card.querySelector('.ev-flag')) card.appendChild(flag(kind));
+  });
 })();
 
 (function highlightCurrentSection() {
