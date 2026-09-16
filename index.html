@@ -6,11 +6,11 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build-version" content="2026-09-16T14:27:00+05:30">
+<meta name="build-version" content="2026-09-16T15:16:18+05:30">
 <title>Aryaban Ganesh Mandal 2026</title>
 <script>
 (function() {
-  var CURRENT_VERSION = "2026-09-16T14:27:00+05:30";
+  var CURRENT_VERSION = "2026-09-16T15:16:18+05:30";
   try {
     fetch(location.pathname + '?_cb=' + Date.now(), { cache: 'no-store' })
       .then(function(r) { return r.text(); })
@@ -323,6 +323,69 @@
   tr.d3-total td:first-child, tr.d2-total td:first-child { padding-right: 0; }
 
   .tblscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
+  /* same amber as the Committed group header in the expenses table */
+  .bstat { position: relative; }
+  .bstat-info {
+    position: absolute; top: 7px; right: 8px;
+    width: 15px; height: 15px; padding: 0;
+    border: 0; border-radius: 50%;
+    background: rgba(107,59,32,.13); color: #6b3b20;
+    font: 700 10px/15px 'Poppins', sans-serif;
+    opacity: .45; cursor: pointer;
+    transition: opacity .15s, background .15s;
+  }
+  .bstat-info:hover, .bstat-info:focus { opacity: 1; background: rgba(107,59,32,.24); outline: none; }
+  .bstat-info::after {
+    content: attr(data-tip);
+    position: absolute; top: 21px; right: 0;
+    width: 172px; padding: 7px 9px;
+    border-radius: 9px;
+    background: #4a2d18; color: #fff;
+    font: 600 10.5px/1.45 'Poppins', sans-serif;
+    letter-spacing: .1px; text-align: left; text-transform: none;
+    box-shadow: 0 6px 16px rgba(0,0,0,.22);
+    opacity: 0; visibility: hidden; transition: opacity .15s;
+    pointer-events: none; z-index: 30;
+  }
+  .bstat-info:hover::after, .bstat-info:focus::after { opacity: 1; visibility: visible; }
+  .bstat-committed { background: linear-gradient(135deg, #fdf0d2, #f6dda6); }
+  .bstat-committed .bstat-val { color: #7a4705; }
+  /* The Committed group sits in a different colour family from the paid rows above -- a
+     slightly different cream was not enough to read as a separate section mid-scroll. */
+  tr.grouphead td {
+    padding: 9px 12px;
+    background: #8a5205;
+    border-top: 3px solid #d89b2c;
+    border-bottom: 0;
+  }
+  .grouphead-chip {
+    display: inline-block; margin-right: 9px;
+    padding: 2.5px 10px; border-radius: 20px;
+    background: #fff3d9; color: #8a5205;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase;
+  }
+  .grouphead-text {
+    font-size: 11.5px; font-weight: 700; color: #ffe6bb; letter-spacing: .2px;
+  }
+  tr.committed-row td {
+    background: #fdf1da;
+    border-bottom: 1px solid #efd9ac;
+  }
+  tr.committed-row td:first-child { border-left: 3px solid #d89b2c; }
+  tr.committed-row:last-child td { border-bottom: 2px solid #d89b2c; }
+  tr.committed-row .rownum { background: #f2d8a4; color: #8a5205; }
+  tr.committed-row .actdate {
+    color: #8a5205; font-style: normal; font-weight: 700;
+    font-size: 10px; text-transform: uppercase; letter-spacing: .3px;
+  }
+  tr.committed-row td.num { color: #8a5205; font-weight: 800; }
+  tr.totalrow.committed-total td {
+    background: #f7e3bb; color: #8a5205; font-weight: 800;
+  }
+  tr.totalrow.grand-total td {
+    background: #f3dcc0; color: #9f1239; font-weight: 800;
+    border-top: 2px solid #9f1239;
+  }
   .tblmore-wrap { display: flex; justify-content: center; margin-top: 10px; }
   .tblmore-btn {
     display: inline-flex; align-items: center; gap: 7px;
@@ -1028,7 +1091,7 @@
     <p class="tag">Ganpati Bappa Morya</p>
     <p class="aarti"><span class="aarti-icon">🪔</span><span class="aarti-label">Daily Aarti</span><span class="aarti-slot"><b>Morning</b>8:30 AM</span><span class="aarti-slot"><b>Evening</b>7:00 PM</span></p>
   </div>
-  <p class="updated">Updated: 16 Sep 2026, 2:27 PM IST</p>
+  <p class="updated">Updated: 16 Sep 2026, 3:16 PM IST</p>
 </header>
 
 <nav class="navbar">
@@ -1175,12 +1238,13 @@
     <div class="card-body" id="budget-body">
     
     <div class="bstat-row">
-      <div class="bstat d7"><div class="bstat-icon">🪙</div><div class="bstat-text"><div class="bstat-label">Estimated Budget</div><div class="bstat-val">₹1,89,800</div></div></div>
-      <div class="bstat d2"><div class="bstat-icon">💳</div><div class="bstat-text"><div class="bstat-label">Actual Spent So Far</div><div class="bstat-val">₹78,043</div></div></div>
-      <div class="bstat d3"><div class="bstat-icon">🥧</div><div class="bstat-text"><div class="bstat-label">Budget Remaining</div><div class="bstat-val">₹1,11,757</div></div></div>
-      <div class="bstat d4">
-        <div class="bstat-ring" style="background: conic-gradient(#7c5fd6 147.96deg, rgba(124,95,214,0.18) 0deg);"><div class="bstat-ring-inner">41%</div></div>
-        <div class="bstat-text"><div class="bstat-label">Budget Utilised</div><div class="bstat-val">41.1%</div></div>
+      <div class="bstat d7"><button class="bstat-info" type="button" aria-label="What this means" data-tip="Planned cost, set at the start.">i</button><div class="bstat-icon">🪙</div><div class="bstat-text"><div class="bstat-label">Estimated Budget</div><div class="bstat-val">₹1,89,800</div></div></div>
+      <div class="bstat d2"><button class="bstat-info" type="button" aria-label="What this means" data-tip="Money already paid out.">i</button><div class="bstat-icon">💳</div><div class="bstat-text"><div class="bstat-label">Actual Spent So Far</div><div class="bstat-val">₹78,043</div></div></div>
+      <div class="bstat bstat-committed"><button class="bstat-info" type="button" aria-label="What this means" data-tip="Orders placed, payment due later.">i</button><div class="bstat-icon">🧾</div><div class="bstat-text"><div class="bstat-label">Committed</div><div class="bstat-val">₹54,000</div></div></div>
+      <div class="bstat d3"><button class="bstat-info" type="button" aria-label="What this means" data-tip="Collected − Spent − Committed.">i</button><div class="bstat-icon">🏦</div><div class="bstat-text"><div class="bstat-label">Funds Available</div><div class="bstat-val">₹80,269</div></div></div>
+      <div class="bstat d4"><button class="bstat-info" type="button" aria-label="What this means" data-tip="(Spent + Committed) ÷ Collected.">i</button>
+        <div class="bstat-ring" style="background: conic-gradient(#7c5fd6 223.92deg, rgba(124,95,214,0.18) 0deg);"><div class="bstat-ring-inner">62%</div></div>
+        <div class="bstat-text"><div class="bstat-label">Collection Utilised</div><div class="bstat-val">62.2%</div></div>
       </div>
     </div>
     <div class="budget-grid">
@@ -1205,8 +1269,8 @@
         <div class="tblscroll">
         <table class="dt fancytable" id="act-table" data-page-size="15">
           <thead><tr><th>#</th><th>Date</th><th>Item</th><th class="num">Amount Paid (₹)</th></tr></thead>
-          <tbody><tr data-search="pavti book"><td><span class="rownum">01</span></td><td class="actdate">23 Aug</td><td>Pavti book</td><td class="num">₹1,700</td></tr><tr data-search="ganpati murti"><td><span class="rownum">02</span></td><td class="actdate">26 Aug</td><td>Ganpati Murti</td><td class="num">₹2,100</td></tr><tr data-search="ganpati: pooja sahitya"><td><span class="rownum">03</span></td><td class="actdate">26 Aug</td><td>Ganpati: Pooja Sahitya</td><td class="num">₹465</td></tr><tr data-search="xerox"><td><span class="rownum">04</span></td><td class="actdate">29 Aug</td><td>Xerox</td><td class="num">₹18</td></tr><tr data-search="mandap"><td><span class="rownum">05</span></td><td class="actdate">31 Aug</td><td>Mandap</td><td class="num">₹11,000</td></tr><tr data-search="dahi handi items"><td><span class="rownum">06</span></td><td class="actdate">05 Sep</td><td>Dahi handi items</td><td class="num">₹177</td></tr><tr data-search="vasappoja sahitya"><td><span class="rownum">07</span></td><td class="actdate">06 Sep</td><td>Vasappoja sahitya</td><td class="num">₹103</td></tr><tr data-search="vasappoja pedhe"><td><span class="rownum">08</span></td><td class="actdate">06 Sep</td><td>Vasappoja Pedhe</td><td class="num">₹160</td></tr><tr data-search="lezim"><td><span class="rownum">09</span></td><td class="actdate">06 Sep</td><td>Lezim</td><td class="num">₹3,000</td></tr><tr data-search="dahi handi: matka + rassi"><td><span class="rownum">10</span></td><td class="actdate">07 Sep</td><td>Dahi Handi: Matka + Rassi</td><td class="num">₹490</td></tr><tr data-search="aagman/ visarjan - benjo+dhol"><td><span class="rownum">11</span></td><td class="actdate">09 Sep</td><td>Aagman/ Visarjan - Benjo+Dhol</td><td class="num">₹10,000</td></tr><tr data-search="mandap"><td><span class="rownum">12</span></td><td class="actdate">09 Sep</td><td>Mandap</td><td class="num">₹10,000</td></tr><tr data-search="lezim pimpri"><td><span class="rownum">13</span></td><td class="actdate">10 Sep</td><td>Lezim Pimpri</td><td class="num">₹1,680</td></tr><tr data-search="banner(ananta awad)"><td><span class="rownum">14</span></td><td class="actdate">11 Sep</td><td>Banner(Ananta Awad)</td><td class="num">₹1,000</td></tr><tr data-search="sugandhalay - pooja sahitya"><td><span class="rownum">15</span></td><td class="actdate">12 Sep</td><td>Sugandhalay - pooja sahitya</td><td class="num">₹1,080</td></tr><tr data-search="sugandhalay sahitya"><td><span class="rownum">16</span></td><td class="actdate">12 Sep</td><td>Sugandhalay sahitya</td><td class="num">₹440</td></tr><tr data-search="balaji - daily prasad +satyanarayna+sthapana"><td><span class="rownum">17</span></td><td class="actdate">12 Sep</td><td>Balaji - daily prasad +satyanarayna+sthapana</td><td class="num">₹3,300</td></tr><tr data-search="satkar patti 25qty"><td><span class="rownum">18</span></td><td class="actdate">12 Sep</td><td>Satkar Patti 25qty</td><td class="num">₹450</td></tr><tr data-search="ganpati headband - 200qty"><td><span class="rownum">19</span></td><td class="actdate">12 Sep</td><td>Ganpati headband - 200qty</td><td class="num">₹600</td></tr><tr data-search="whistles 12 qty"><td><span class="rownum">20</span></td><td class="actdate">12 Sep</td><td>Whistles 12 qty</td><td class="num">₹120</td></tr><tr data-search="plastic balls 36 scissor ropes-5"><td><span class="rownum">21</span></td><td class="actdate">12 Sep</td><td>Plastic Balls 36 scissor ropes-5</td><td class="num">₹620</td></tr><tr data-search="balloons and masking tapes"><td><span class="rownum">22</span></td><td class="actdate">12 Sep</td><td>Balloons and masking tapes</td><td class="num">₹220</td></tr><tr data-search="handwash 2 qty"><td><span class="rownum">23</span></td><td class="actdate">12 Sep</td><td>Handwash 2 qty</td><td class="num">₹140</td></tr><tr data-search="red velvet - aasan + backdrop future 6 mtr"><td><span class="rownum">24</span></td><td class="actdate">12 Sep</td><td>Red velvet - aasan + backdrop future 6 mtr</td><td class="num">₹600</td></tr><tr data-search="artificial zendu mala - 25qty"><td><span class="rownum">25</span></td><td class="actdate">12 Sep</td><td>Artificial Zendu Mala - 25qty</td><td class="num">₹500</td></tr><tr data-search="bin bag big + multiple sized celotapes"><td><span class="rownum">26</span></td><td class="actdate">12 Sep</td><td>Bin bag big + multiple sized celotapes</td><td class="num">₹270</td></tr><tr data-search="paper glasses for games 200qty"><td><span class="rownum">27</span></td><td class="actdate">12 Sep</td><td>Paper glasses for games 200qty</td><td class="num">₹210</td></tr><tr data-search="safety pins for decoration"><td><span class="rownum">28</span></td><td class="actdate">13 Sep</td><td>Safety pins for decoration</td><td class="num">₹40</td></tr><tr data-search="metallic wire and tie clips"><td><span class="rownum">29</span></td><td class="actdate">13 Sep</td><td>Metallic wire and tie clips</td><td class="num">₹200</td></tr><tr data-search="ganpati murti"><td><span class="rownum">30</span></td><td class="actdate">13 Sep</td><td>Ganpati Murti</td><td class="num">₹8,900</td></tr><tr data-search="mala for ganpati decor"><td><span class="rownum">31</span></td><td class="actdate">13 Sep</td><td>Mala for Ganpati decor</td><td class="num">₹750</td></tr><tr data-search="diva + rangnath"><td><span class="rownum">32</span></td><td class="actdate">13 Sep</td><td>Diva + Rangnath</td><td class="num">₹700</td></tr><tr data-search="mutli color focus"><td><span class="rownum">33</span></td><td class="actdate">13 Sep</td><td>Mutli color focus</td><td class="num">₹1,600</td></tr><tr data-search="electric mala 3 qty"><td><span class="rownum">34</span></td><td class="actdate">13 Sep</td><td>Electric Mala 3 qty</td><td class="num">₹850</td></tr><tr data-search="decor flower wines - 13 dozen"><td><span class="rownum">35</span></td><td class="actdate">13 Sep</td><td>Decor flower wines - 13 dozen</td><td class="num">₹2,080</td></tr><tr data-search="backdrop fur"><td><span class="rownum">36</span></td><td class="actdate">13 Sep</td><td>Backdrop fur</td><td class="num">₹1,800</td></tr><tr data-search="organizer plastic box"><td><span class="rownum">37</span></td><td class="actdate">14 Sep</td><td>Organizer plastic box</td><td class="num">₹180</td></tr><tr data-search="3-pin 2 qty and 5 mtr wire with m/f pins"><td><span class="rownum">38</span></td><td class="actdate">15 Sep</td><td>3-Pin 2 qty and 5 mtr wire with M/F pins</td><td class="num">₹280</td></tr><tr data-search="aagman prasad pedha 2kg"><td><span class="rownum">39</span></td><td class="actdate">15 Sep</td><td>Aagman Prasad pedha 2kg</td><td class="num">₹1,280</td></tr><tr data-search="aagman - benjo+dhol"><td><span class="rownum">40</span></td><td class="actdate">15 Sep</td><td>Aagman - Benjo+Dhol</td><td class="num">₹5,000</td></tr><tr data-search="aagman miravnuk tempo"><td><span class="rownum">41</span></td><td class="actdate">15 Sep</td><td>Aagman miravnuk tempo</td><td class="num">₹1,000</td></tr><tr data-search="aagman pooja - dakshana"><td><span class="rownum">42</span></td><td class="actdate">15 Sep</td><td>Aagman Pooja - Dakshana</td><td class="num">₹1,100</td></tr><tr data-search="aagman - flowers"><td><span class="rownum">43</span></td><td class="actdate">15 Sep</td><td>Aagman - flowers</td><td class="num">₹350</td></tr><tr data-search="aagman - water bottles"><td><span class="rownum">44</span></td><td class="actdate">15 Sep</td><td>Aagman - water bottles</td><td class="num">₹800</td></tr><tr data-search="a3 drawing papers"><td><span class="rownum">45</span></td><td class="actdate">15 Sep</td><td>A3 drawing papers</td><td class="num">₹220</td></tr><tr data-search="chocolates for kids"><td><span class="rownum">46</span></td><td class="actdate">16 Sep</td><td>Chocolates for kids</td><td class="num">₹470</td></tr></tbody>
-          <tfoot><tr class="totalrow d2-total"><td colspan="3">&Sigma; Total Actual Expenses</td><td class="num">₹78,043</td></tr></tfoot>
+          <tbody><tr data-search="pavti book"><td><span class="rownum">01</span></td><td class="actdate">23 Aug</td><td>Pavti book</td><td class="num">₹1,700</td></tr><tr data-search="ganpati murti"><td><span class="rownum">02</span></td><td class="actdate">26 Aug</td><td>Ganpati Murti</td><td class="num">₹2,100</td></tr><tr data-search="ganpati: pooja sahitya"><td><span class="rownum">03</span></td><td class="actdate">26 Aug</td><td>Ganpati: Pooja Sahitya</td><td class="num">₹465</td></tr><tr data-search="xerox"><td><span class="rownum">04</span></td><td class="actdate">29 Aug</td><td>Xerox</td><td class="num">₹18</td></tr><tr data-search="mandap"><td><span class="rownum">05</span></td><td class="actdate">31 Aug</td><td>Mandap</td><td class="num">₹11,000</td></tr><tr data-search="dahi handi items"><td><span class="rownum">06</span></td><td class="actdate">05 Sep</td><td>Dahi handi items</td><td class="num">₹177</td></tr><tr data-search="vasappoja sahitya"><td><span class="rownum">07</span></td><td class="actdate">06 Sep</td><td>Vasappoja sahitya</td><td class="num">₹103</td></tr><tr data-search="vasappoja pedhe"><td><span class="rownum">08</span></td><td class="actdate">06 Sep</td><td>Vasappoja Pedhe</td><td class="num">₹160</td></tr><tr data-search="lezim"><td><span class="rownum">09</span></td><td class="actdate">06 Sep</td><td>Lezim</td><td class="num">₹3,000</td></tr><tr data-search="dahi handi: matka + rassi"><td><span class="rownum">10</span></td><td class="actdate">07 Sep</td><td>Dahi Handi: Matka + Rassi</td><td class="num">₹490</td></tr><tr data-search="aagman/ visarjan - benjo+dhol"><td><span class="rownum">11</span></td><td class="actdate">09 Sep</td><td>Aagman/ Visarjan - Benjo+Dhol</td><td class="num">₹10,000</td></tr><tr data-search="mandap"><td><span class="rownum">12</span></td><td class="actdate">09 Sep</td><td>Mandap</td><td class="num">₹10,000</td></tr><tr data-search="lezim pimpri"><td><span class="rownum">13</span></td><td class="actdate">10 Sep</td><td>Lezim Pimpri</td><td class="num">₹1,680</td></tr><tr data-search="banner(ananta awad)"><td><span class="rownum">14</span></td><td class="actdate">11 Sep</td><td>Banner(Ananta Awad)</td><td class="num">₹1,000</td></tr><tr data-search="sugandhalay - pooja sahitya"><td><span class="rownum">15</span></td><td class="actdate">12 Sep</td><td>Sugandhalay - pooja sahitya</td><td class="num">₹1,080</td></tr><tr data-search="sugandhalay sahitya"><td><span class="rownum">16</span></td><td class="actdate">12 Sep</td><td>Sugandhalay sahitya</td><td class="num">₹440</td></tr><tr data-search="balaji - daily prasad +satyanarayna+sthapana"><td><span class="rownum">17</span></td><td class="actdate">12 Sep</td><td>Balaji - daily prasad +satyanarayna+sthapana</td><td class="num">₹3,300</td></tr><tr data-search="satkar patti 25qty"><td><span class="rownum">18</span></td><td class="actdate">12 Sep</td><td>Satkar Patti 25qty</td><td class="num">₹450</td></tr><tr data-search="ganpati headband - 200qty"><td><span class="rownum">19</span></td><td class="actdate">12 Sep</td><td>Ganpati headband - 200qty</td><td class="num">₹600</td></tr><tr data-search="whistles 12 qty"><td><span class="rownum">20</span></td><td class="actdate">12 Sep</td><td>Whistles 12 qty</td><td class="num">₹120</td></tr><tr data-search="plastic balls 36 scissor ropes-5"><td><span class="rownum">21</span></td><td class="actdate">12 Sep</td><td>Plastic Balls 36 scissor ropes-5</td><td class="num">₹620</td></tr><tr data-search="balloons and masking tapes"><td><span class="rownum">22</span></td><td class="actdate">12 Sep</td><td>Balloons and masking tapes</td><td class="num">₹220</td></tr><tr data-search="handwash 2 qty"><td><span class="rownum">23</span></td><td class="actdate">12 Sep</td><td>Handwash 2 qty</td><td class="num">₹140</td></tr><tr data-search="red velvet - aasan + backdrop future 6 mtr"><td><span class="rownum">24</span></td><td class="actdate">12 Sep</td><td>Red velvet - aasan + backdrop future 6 mtr</td><td class="num">₹600</td></tr><tr data-search="artificial zendu mala - 25qty"><td><span class="rownum">25</span></td><td class="actdate">12 Sep</td><td>Artificial Zendu Mala - 25qty</td><td class="num">₹500</td></tr><tr data-search="bin bag big + multiple sized celotapes"><td><span class="rownum">26</span></td><td class="actdate">12 Sep</td><td>Bin bag big + multiple sized celotapes</td><td class="num">₹270</td></tr><tr data-search="paper glasses for games 200qty"><td><span class="rownum">27</span></td><td class="actdate">12 Sep</td><td>Paper glasses for games 200qty</td><td class="num">₹210</td></tr><tr data-search="safety pins for decoration"><td><span class="rownum">28</span></td><td class="actdate">13 Sep</td><td>Safety pins for decoration</td><td class="num">₹40</td></tr><tr data-search="metallic wire and tie clips"><td><span class="rownum">29</span></td><td class="actdate">13 Sep</td><td>Metallic wire and tie clips</td><td class="num">₹200</td></tr><tr data-search="ganpati murti"><td><span class="rownum">30</span></td><td class="actdate">13 Sep</td><td>Ganpati Murti</td><td class="num">₹8,900</td></tr><tr data-search="mala for ganpati decor"><td><span class="rownum">31</span></td><td class="actdate">13 Sep</td><td>Mala for Ganpati decor</td><td class="num">₹750</td></tr><tr data-search="diva + rangnath"><td><span class="rownum">32</span></td><td class="actdate">13 Sep</td><td>Diva + Rangnath</td><td class="num">₹700</td></tr><tr data-search="mutli color focus"><td><span class="rownum">33</span></td><td class="actdate">13 Sep</td><td>Mutli color focus</td><td class="num">₹1,600</td></tr><tr data-search="electric mala 3 qty"><td><span class="rownum">34</span></td><td class="actdate">13 Sep</td><td>Electric Mala 3 qty</td><td class="num">₹850</td></tr><tr data-search="decor flower wines - 13 dozen"><td><span class="rownum">35</span></td><td class="actdate">13 Sep</td><td>Decor flower wines - 13 dozen</td><td class="num">₹2,080</td></tr><tr data-search="backdrop fur"><td><span class="rownum">36</span></td><td class="actdate">13 Sep</td><td>Backdrop fur</td><td class="num">₹1,800</td></tr><tr data-search="organizer plastic box"><td><span class="rownum">37</span></td><td class="actdate">14 Sep</td><td>Organizer plastic box</td><td class="num">₹180</td></tr><tr data-search="3-pin 2 qty and 5 mtr wire with m/f pins"><td><span class="rownum">38</span></td><td class="actdate">15 Sep</td><td>3-Pin 2 qty and 5 mtr wire with M/F pins</td><td class="num">₹280</td></tr><tr data-search="aagman prasad pedha 2kg"><td><span class="rownum">39</span></td><td class="actdate">15 Sep</td><td>Aagman Prasad pedha 2kg</td><td class="num">₹1,280</td></tr><tr data-search="aagman - benjo+dhol"><td><span class="rownum">40</span></td><td class="actdate">15 Sep</td><td>Aagman - Benjo+Dhol</td><td class="num">₹5,000</td></tr><tr data-search="aagman miravnuk tempo"><td><span class="rownum">41</span></td><td class="actdate">15 Sep</td><td>Aagman miravnuk tempo</td><td class="num">₹1,000</td></tr><tr data-search="aagman pooja - dakshana"><td><span class="rownum">42</span></td><td class="actdate">15 Sep</td><td>Aagman Pooja - Dakshana</td><td class="num">₹1,100</td></tr><tr data-search="aagman - flowers"><td><span class="rownum">43</span></td><td class="actdate">15 Sep</td><td>Aagman - flowers</td><td class="num">₹350</td></tr><tr data-search="aagman - water bottles"><td><span class="rownum">44</span></td><td class="actdate">15 Sep</td><td>Aagman - water bottles</td><td class="num">₹800</td></tr><tr data-search="a3 drawing papers"><td><span class="rownum">45</span></td><td class="actdate">15 Sep</td><td>A3 drawing papers</td><td class="num">₹220</td></tr><tr data-search="chocolates for kids"><td><span class="rownum">46</span></td><td class="actdate">16 Sep</td><td>Chocolates for kids</td><td class="num">₹470</td></tr></tbody><tbody class="committed-body"><tr class="grouphead"><td colspan="4"><span class="grouphead-chip">Committed</span><span class="grouphead-text">Finalised — payment due later</span></td></tr><tr class="committed-row" data-search="daily garland for ganpati"><td><span class="rownum">01</span></td><td class="actdate">Due later</td><td>Daily Garland for Ganpati</td><td class="num">₹5,000</td></tr><tr class="committed-row" data-search="mandap"><td><span class="rownum">02</span></td><td class="actdate">Due later</td><td>Mandap</td><td class="num">₹17,000</td></tr><tr class="committed-row" data-search="visarjan - dhol + benjo"><td><span class="rownum">03</span></td><td class="actdate">Due later</td><td>Visarjan - Dhol + Benjo</td><td class="num">₹10,000</td></tr><tr class="committed-row" data-search="aachari"><td><span class="rownum">04</span></td><td class="actdate">Due later</td><td>Aachari</td><td class="num">₹22,000</td></tr></tbody>
+          <tfoot><tr class="totalrow d2-total"><td colspan="3">&Sigma; Total Actual Expenses</td><td class="num">₹78,043</td></tr><tr class="totalrow committed-total"><td colspan="3">&Sigma; Total Committed</td><td class="num">₹54,000</td></tr><tr class="totalrow grand-total"><td colspan="3">&Sigma; Spent + Committed</td><td class="num">₹1,32,043</td></tr></tfoot>
         </table>
         </div>
         <div class="tblmore-wrap"><button type="button" class="tblmore-btn" data-page-table="act-table"><span class="tblmore-text">Show more</span><span class="tblmore-chev"></span></button></div>
@@ -1813,13 +1877,26 @@ function tblRefresh(table) {
   var pageSize = parseInt(table.getAttribute('data-page-size') || '0', 10);
   var limit = parseInt(table.getAttribute('data-shown') || String(pageSize), 10);
   var paging = pageSize > 0 && q === '';
+  var firstBody = table.tBodies[0];
   var matched = 0, shown = 0;
   table.querySelectorAll('tbody tr[data-search]').forEach(function(row) {
     var match = q === '' || row.getAttribute('data-search').indexOf(q) !== -1;
+    // rows outside the first tbody (the Committed group) are searchable but never paged --
+    // they are a small fixed set and must stay visible at the end of the table
+    if (row.parentNode !== firstBody) {
+      row.style.display = match ? '' : 'none';
+      return;
+    }
     if (match) matched++;
     var visible = match && (!paging || shown < limit);
     if (visible) shown++;
     row.style.display = visible ? '' : 'none';
+  });
+  // a group heading shows only while its group still has a visible row
+  table.querySelectorAll('tr.grouphead').forEach(function(head) {
+    var rows = head.parentNode.querySelectorAll('tr[data-search]');
+    var any = Array.prototype.some.call(rows, function(r) { return r.style.display !== 'none'; });
+    head.style.display = any ? '' : 'none';
   });
   var btn = document.querySelector('[data-page-table="' + table.id + '"]');
   if (btn) {
