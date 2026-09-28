@@ -3,19 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- These three are inert: browsers ignore http-equiv cache directives for HTML served over
+     HTTP, and the host's own response headers decide caching. The real mechanism is the
+     build-version check in the script below. Kept only because they do no harm. -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="build-version" content="2026-09-28T20:07:58+05:30">
+<meta name="build-version" content="2026-09-28T20:17:03+05:30">
 <title>Aryaban Ganesh Mandal 2026</title>
 <script>
 (function() {
-  var CURRENT_VERSION = "2026-09-28T20:07:58+05:30";
+  var CURRENT_VERSION = "2026-09-28T20:17:03+05:30";
   try {
-    fetch(location.pathname + '?_cb=' + Date.now(), { cache: 'no-store' })
+    // Range: only the first 2 KB is needed -- the build-version meta sits at byte ~324.
+    // Without this the check downloads the whole ~1.6 MB page, which on mobile data leaves the
+    // stale copy on screen for seconds before the redirect fires. Servers that ignore Range
+    // simply return the full file, so this is safe either way.
+    fetch(location.pathname + '?_cb=' + Date.now(), {
+      cache: 'no-store',
+      headers: { 'Range': 'bytes=0-2047' }
+    })
       .then(function(r) { return r.text(); })
       .then(function(html) {
-        var m = html.match(/name="build-version" content="([^"]+)"/);
+        // The (20\d\d...) prefix matters: this same pattern appears twice in the first 2 KB --
+        // once as the real meta tag, once as this very regex literal in the script source.
+        // Requiring a year makes it impossible to match ourselves and redirect-loop forever.
+        var m = html.match(/name="build-version" content="(20\d\d[^"]*)"/);
         if (m && m[1] !== CURRENT_VERSION) {
           location.replace(location.pathname + '?_v=' + Date.now());
         }
@@ -1100,7 +1113,7 @@
     <p class="tag">Ganpati Bappa Morya</p>
     <p class="aarti"><span class="aarti-icon">🪔</span><span class="aarti-label">Daily Aarti</span><span class="aarti-slot"><b>Morning</b>8:30 AM</span><span class="aarti-slot"><b>Evening</b>7:00 PM</span></p>
   </div>
-  <p class="updated">Updated: 28 Sep 2026, 8:07 PM IST</p>
+  <p class="updated">Updated: 28 Sep 2026, 8:17 PM IST</p>
 </header>
 
 <nav class="navbar">
